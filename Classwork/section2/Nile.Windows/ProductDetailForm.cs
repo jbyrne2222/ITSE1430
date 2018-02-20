@@ -19,6 +19,20 @@ namespace Nile.Windows
 
         public Product Product { get; set; }
 
+        protected override void OnLoad( EventArgs e )
+        {
+            base.OnLoad(e);
+
+            //Load product
+            if (Product != null)
+            {
+                _txtName.Text = Product.Name;
+                _txtDescription.Text = Product.Description;
+                _txtPrice.Text = Product.Price.ToString();
+                _chkIsDiscontinued.Checked = Product.IsDiscontinued;
+            };
+        }
+
         private void OnCancel( object sender, EventArgs e )
         {
 
