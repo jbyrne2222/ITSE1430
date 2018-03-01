@@ -129,11 +129,6 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Price:";
             // 
-            // _errorProvider
-            // 
-            this._errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this._errorProvider.ContainerControl = this;
-            // 
             // ProductDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
