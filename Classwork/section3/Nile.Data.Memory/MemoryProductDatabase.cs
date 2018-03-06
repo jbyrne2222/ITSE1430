@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,29 +12,52 @@ namespace Nile.Data.Memory
     {
         public MemoryProductDatabase()
         {
+            //Array version
+            //var prods = new Product[]
+            //var prods = new []
+            //    {
+            //        new Product(),
+            //        new Product()
+            //    };
+            
             //_products = new Product[25];
+            _products = new List<Product>() 
+            {
+                new Product() { Id = _nextId++, Name = "iPhone X",
+                                IsDiscontinued = true, Price = 1500, },
 
-            var product = new Product();
-            product.Id = _nextId++;
-            product.Name = "iPhone X";
-            product.IsDiscontinued = true;
-            product.Price = 1500;
-            _products.Add(product);
+                new Product() { Id = _nextId++, Name = "Windows Phone",
+                                IsDiscontinued = true, Price = 15, },
 
-            product = new Product();
-            product.Id = _nextId++;
-            product.Name = "Windows Phone";
-            product.IsDiscontinued = true;
-            product.Price = 15;
-            _products.Add(product);
+                new Product() { Id = _nextId++, Name = "Samsung S8",
+                                IsDiscontinued = false, Price = 800, },
+            };
 
-            product = new Product();
-            product.Id = _nextId++;
-            product.Name = "Samsung S8";
-            product.IsDiscontinued = false;
-            product.Price = 800;
-            _products.Add(product);
+            //var product = new Product() {
+            //    Id = _nextId++,
+            //    Name = "iPhone X",
+            //    IsDiscontinued = true,
+            //    Price = 1500,
+            //};
+            //_products.Add(product);
+
+            //product = new Product() {
+            //    Id = _nextId++,
+            //    Name = "Windows Phone",
+            //    IsDiscontinued = true,
+            //    Price = 15,
+            //};
+            //_products.Add(product);
+
+            //product = new Product() {
+            //    Id = _nextId++,
+            //    Name = "Samsung S8",
+            //    IsDiscontinued = false,
+            //    Price = 800,
+            //};
+            //_products.Add(product);
         }
+
         public Product Add ( Product product, out string message )
         {
             if (product == null)
@@ -43,10 +67,12 @@ namespace Nile.Data.Memory
             };
 
             //Validate product
-            var error = product.Validate();
-            if(!String.IsNullOrEmpty(error))
+            //var error = product.Validate();
+            var errors = ObjectValidator.Validate(product);
+
+            if(errors.Count() > 0)
             {
-                message = error;
+                message = errors.ElementAt(0).ErrorMessage;
                 return null;
             };
 
