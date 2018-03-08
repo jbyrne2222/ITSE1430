@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Nile.Data;
 using Nile.Data.Memory;
 
 namespace Nile.Windows
@@ -31,35 +32,35 @@ namespace Nile.Windows
             RefreshUI();
         }
 
-        private void PlayingWithProductMembers ()
-        { 
-            var product = new Product();
-
-            Decimal.TryParse("123", out var price);
-            product.Price = price;
-
-            var name = product.Name;
-            //var name = product.GetName();
-            product.Name = "Product A";
-            product.Price = 50;
-            product.IsDiscontinued = true;
-
-            //product.ActualPrice = 10;
-            var price2 = product.ActualPrice;
-
-            //product.SetName("Product A");
-            //product.Description = "None";
-            var error = product.Validate();
-
-            var str = product.ToString();
-
-            var productB = new Product();
-            //productB.Name = "Product B";
-            //productB.SetName("Product B");
-            //productB.Description = product.Description;
-            error = productB.Validate();
-
-        }
+        //private void PlayingWithProductMembers ()
+        //{ 
+        //    var product = new Product();
+        //
+        //    Decimal.TryParse("123", out var price);
+        //    product.Price = price;
+        //
+        //    var name = product.Name;
+        //    //var name = product.GetName();
+        //    product.Name = "Product A";
+        //    product.Price = 50;
+        //    product.IsDiscontinued = true;
+        //
+        //    //product.ActualPrice = 10;
+        //    var price2 = product.ActualPrice;
+        //
+        //    //product.SetName("Product A");
+        //    //product.Description = "None";
+        //    var error = product.Validate();
+        //
+        //    var str = product.ToString();
+        //
+        //    var productB = new Product();
+        //    //productB.Name = "Product B";
+        //    //productB.SetName("Product B");
+        //    //productB.Description = product.Description;
+        //    error = productB.Validate();
+        //
+        //}
 
         #region Event Handlers
 
@@ -102,7 +103,7 @@ namespace Nile.Windows
 
             //Update the product
             form.Product.Id = product.Id;
-            _database.Edit(form.Product, out var message);
+            _database.Update(form.Product, out var message);
             if (!String.IsNullOrEmpty(message))
                 MessageBox.Show(message);
 
@@ -157,7 +158,7 @@ namespace Nile.Windows
             //products[0].Name = "Product A";
 
             //Bind to grid
-            dataGridView1.DataSource = products;
+            dataGridView1.DataSource = new List<Product>(products);
         }
 
         private bool ShowConfirmation ( string message, string title )
@@ -167,6 +168,6 @@ namespace Nile.Windows
                == DialogResult.Yes;
         }
 
-        private MemoryProductDatabase _database = new MemoryProductDatabase();
+        private IProductDatabase _database = new MemoryProductDatabase();
     }
 }

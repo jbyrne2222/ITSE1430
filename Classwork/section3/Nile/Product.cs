@@ -82,7 +82,8 @@ namespace Nile
         //}
 
         /// <summary>Validates the product.</summary>
-        /// <returns>Error message, if any.</returns>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
         {
             var errors = new List<ValidationResult>();
@@ -90,12 +91,12 @@ namespace Nile
             // Name is required
             if (String.IsNullOrEmpty(_name))
                 errors.Add(new ValidationResult("Name cannot be empty",
-                             new[] { "Name" }));
+                             new[] { nameof(Name) }));
 
             //Price >= 0
             if (Price < 0)
                 errors.Add(new ValidationResult("Price must be >= 0",
-                             new[] { "Price" }));
+                             new[] { nameof(Price) }));
 
             return errors;
         }

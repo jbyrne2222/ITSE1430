@@ -86,11 +86,11 @@ namespace Nile.Windows
                 IsDiscontinued = _chkIsDiscontinued.Checked,
             };
 
-            //Validate
-            var message = product.Validate();
-            if (!String.IsNullOrEmpty(message))
+            //Validate product using IValidateableObject
+            var errors = ObjectValidator.Validate(product);
+            if (errors.Count() > 0)
             {
-                DisplayError(message);
+                DisplayError(errors.ElementAt(0).ErrorMessage);
                 return;
             };
 
