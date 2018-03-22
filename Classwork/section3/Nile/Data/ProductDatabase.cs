@@ -20,12 +20,22 @@ namespace Nile.Data
             };
 
             //Validate product
-            //var error = product.Validate();
-            var errors = ObjectValidator.Validate(product);
+            var errors = product.Validate();
+            //var errors = ObjectValidator.Validate(product);
 
-            if(errors.Count() > 0)
+            //if(errors.Count() > 0)
+            //{
+            //    var error = Enumerable.First(errors);
+
+            //    //Get first error
+            //    message = errors.ElementAt(0).ErrorMessage;
+            //    return null;
+            //};
+
+            var error = errors.FirstOrDefault();
+            if (error != null)
             {
-                message = errors.ElementAt(0).ErrorMessage;
+                message = error.ErrorMessage;
                 return null;
             };
 

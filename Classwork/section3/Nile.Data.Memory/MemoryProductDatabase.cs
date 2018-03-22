@@ -10,53 +10,53 @@ namespace Nile.Data.Memory
     /// <summary>Provides an in-memory product database.</summary>
     public class MemoryProductDatabase : ProductDatabase
     {
-        public MemoryProductDatabase()
-        {
-            //Array version
-            //var prods = new Product[]
-            //var prods = new []
-            //    {
-            //        new Product(),
-            //        new Product()
-            //    };
+        //public MemoryProductDatabase()
+        //{
+        //    //Array version
+        //    //var prods = new Product[]
+        //    //var prods = new []
+        //    //    {
+        //    //        new Product(),
+        //    //        new Product()
+        //    //    };
             
-            //_products = new Product[25];
-            _products = new List<Product>() 
-            {
-                new Product() { Id = _nextId++, Name = "iPhone X",
-                                IsDiscontinued = true, Price = 1500, },
+        //    //_products = new Product[25];
+        //    _products = new List<Product>() 
+        //    {
+        //        new Product() { Id = _nextId++, Name = "iPhone X",
+        //                        IsDiscontinued = true, Price = 1500, },
 
-                new Product() { Id = _nextId++, Name = "Windows Phone",
-                                IsDiscontinued = true, Price = 15, },
+        //        new Product() { Id = _nextId++, Name = "Windows Phone",
+        //                        IsDiscontinued = true, Price = 15, },
 
-                new Product() { Id = _nextId++, Name = "Samsung S8",
-                                IsDiscontinued = false, Price = 800, },
-            };
+        //        new Product() { Id = _nextId++, Name = "Samsung S8",
+        //                        IsDiscontinued = false, Price = 800, },
+        //    };
 
-            //var product = new Product() {
-            //    Id = _nextId++,
-            //    Name = "iPhone X",
-            //    IsDiscontinued = true,
-            //    Price = 1500,
-            //};
-            //_products.Add(product);
+        //    //var product = new Product() {
+        //    //    Id = _nextId++,
+        //    //    Name = "iPhone X",
+        //    //    IsDiscontinued = true,
+        //    //    Price = 1500,
+        //    //};
+        //    //_products.Add(product);
 
-            //product = new Product() {
-            //    Id = _nextId++,
-            //    Name = "Windows Phone",
-            //    IsDiscontinued = true,
-            //    Price = 15,
-            //};
-            //_products.Add(product);
+        //    //product = new Product() {
+        //    //    Id = _nextId++,
+        //    //    Name = "Windows Phone",
+        //    //    IsDiscontinued = true,
+        //    //    Price = 15,
+        //    //};
+        //    //_products.Add(product);
 
-            //product = new Product() {
-            //    Id = _nextId++,
-            //    Name = "Samsung S8",
-            //    IsDiscontinued = false,
-            //    Price = 800,
-            //};
-            //_products.Add(product);
-        }
+        //    //product = new Product() {
+        //    //    Id = _nextId++,
+        //    //    Name = "Samsung S8",
+        //    //    IsDiscontinued = false,
+        //    //    Price = 800,
+        //    //};
+        //    //_products.Add(product);
+        //}
 
         protected override Product AddCore ( Product product )
         {

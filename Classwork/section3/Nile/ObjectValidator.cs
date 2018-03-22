@@ -7,14 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Nile
-{
+{/// <summary>Provides support for validating data</summary>
     public static class ObjectValidator
     {
-        public static IEnumerable<ValidationResult> Validate ( object value )
+        /// <summary>Validates an object and all properties.</summary>
+        /// <param name="source">The object to validate.</param>
+        /// <returns>The validation results.</returns>
+        public static IEnumerable<ValidationResult> Validate ( this IValidatableObject source )
         {
-            var context = new ValidationContext(value);
+            var context = new ValidationContext(source);
             var errors = new Collection<ValidationResult>();
-            var results = Validator.TryValidateObject(value, context, errors, true);
+            var results = Validator.TryValidateObject(source, context, errors, true);
 
             return errors;
         }
