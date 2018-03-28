@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this._txtName = new System.Windows.Forms.TextBox();
             this._txtDescription = new System.Windows.Forms.TextBox();
             this._txtPrice = new System.Windows.Forms.TextBox();
@@ -37,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this._errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // _txtName
@@ -129,6 +132,11 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Price:";
             // 
+            // _errorProvider
+            // 
+            this._errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errorProvider.ContainerControl = this;
+            // 
             // ProductDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,6 +159,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Product Details";
+            ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +176,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ErrorProvider _errorProvider;
     }
 }

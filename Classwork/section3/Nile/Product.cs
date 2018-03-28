@@ -6,6 +6,7 @@
 
  using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace Nile
 {
     /// <summary>Provides information about a product.</summary>
-    public class Product
+    public class Product : IValidatableObject
     {
         /// <summary>Gets or sets the product ID.</summary>
         public int Id { get; set; }
@@ -81,18 +82,23 @@ namespace Nile
         //}
 
         /// <summary>Validates the product.</summary>
-        /// <returns>Error message, if any.</returns>
-        public string Validate ()
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
+        public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
         {
+            var errors = new List<ValidationResult>();
+
             // Name is required
             if (String.IsNullOrEmpty(_name))
-                return "Name cannot be empty";
+                errors.Add(new ValidationResult("Name cannot be empty",
+                             new[] { nameof(Name) }));
 
             //Price >= 0
             if (Price < 0)
-                return "Price must be >= 0";
+                errors.Add(new ValidationResult("Price must be >= 0",
+                             new[] { nameof(Price) }));
 
-            return "";
+            return errors;
         }
 
         private string _name;
