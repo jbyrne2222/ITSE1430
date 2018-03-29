@@ -4,8 +4,8 @@ namespace Nile.Data
 {
     public interface IProductDatabase
     {
-        Product Add( Product product, out string message );
-        Product Update( Product product, out string message );
+        Product Add( Product product );
+        Product Update( Product product );
         IEnumerable<Product> GetAll();
         void Remove( int id );
     }

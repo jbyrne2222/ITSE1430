@@ -54,42 +54,60 @@ namespace Nile.Data.IO
         {
             var items = new List<Product>();
 
-            //Make sure the file exists
-            if (!File.Exists(_filename))
-                return items;
-
-            var lines = File.ReadAllLines(_filename);
-            foreach (var line in lines)
+            try
             {
-                var fields = line.Split(',');
+                //Make sure the file exists
+                if (!File.Exists(_filename))
+                    return items;
 
-                var product = new Product() {
-                    Id = ParseInt32(fields[0]),
-                    Name = fields[1],
-                    Description = fields[2],
-                    Price = ParseDecimal(fields[3]),
-                    IsDiscontinued = ParseInt32(fields[4]) != 0
+                var lines = File.ReadAllLines(_filename);
+                foreach (var line in lines)
+                {
+                    var fields = line.Split(',');
+
+                    var product = new Product() {
+                        Id = ParseInt32(fields[0]),
+                        Name = fields[1],
+                        Description = fields[2],
+                        Price = ParseDecimal(fields[3]),
+                        IsDiscontinued = ParseInt32(fields[4]) != 0
+                    };
+                    items.Add(product);
                 };
-                items.Add(product);
-            };
 
-            return items;
+                return items;
+            } catch (Exception e)
+            {
+                throw new Exception("Failure loading data", e);
+            };
         }
 
         private void SaveData()
         {
-            var stream = File.OpenWrite(_filename);
-            var writer = new StreamWriter(stream);
-
-            foreach (var item in _items)
+            try
             {
-                var line = $"{item.Id},{item.Name},{item.Description},{item.Price},{(item.IsDiscontinued ? 1 : 0)}";
+                var stream = File.OpenWrite(_filename);
+                var writer = new StreamWriter(stream);
 
-                writer.WriteLine(line);
+                foreach (var item in _items)
+                {
+                    var line = $"{item.Id},{item.Name},{item.Description},{item.Price},{(item.IsDiscontinued ? 1 : 0)}";
+
+                    writer.WriteLine(line);
+                };
+
+                writer.Close();
+                stream.Close();
+            } catch (ArgumentException e)
+            {
+                //Rethrowing exception
+                throw;
+                //throw e;
+                //Never right!!!
+            } catch (Exception e)
+            {
+                throw new Exception("Save failed", e);
             };
-
-            writer.Close();
-            stream.Close();
         }
 
         private void SaveDataNonStream ()
