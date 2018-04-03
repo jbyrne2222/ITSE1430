@@ -40,13 +40,17 @@ namespace Nile.Data.IO
             {
                 _items = LoadData();
 
-                _id = 0;
-                foreach (var item in _items)
+                //_id = 0;
+                //foreach (var item in _items)
+                //{
+                //    if (item.Id > _id)
+                //        _id = item.Id;
+                //};
+                if (_items.Any())
                 {
-                    if (item.Id > _id)
-                        _id = item.Id;
+                    _id = _items.Max(i => i.Id);
+                    ++_id;
                 };
-                ++_id;
             };
         }
 
@@ -84,10 +88,27 @@ namespace Nile.Data.IO
 
         private void SaveData()
         {
+            using (var stream = File.OpenWrite(_filename))
+            using (var writer = new StreamWriter(stream))
+            {
+                foreach (var item in _items)
+                {
+                    var line = $"{item.Id},{item.Name},{item.Description}," +
+                               $"{item.Price},{(item.IsDiscontinued ? 1 : 0)}";
+
+                    writer.WriteLine(line);
+                };
+            };
+        }
+
+        private void SaveDataPoorer()
+        {
+            Stream stream = null;
+            StreamWriter writer = null;
             try
             {
-                var stream = File.OpenWrite(_filename);
-                var writer = new StreamWriter(stream);
+                stream = File.OpenWrite(_filename);
+                writer = new StreamWriter(stream);
 
                 foreach (var item in _items)
                 {
@@ -95,9 +116,6 @@ namespace Nile.Data.IO
 
                     writer.WriteLine(line);
                 };
-
-                writer.Close();
-                stream.Close();
             } catch (ArgumentException e)
             {
                 //Rethrowing exception
@@ -106,19 +124,28 @@ namespace Nile.Data.IO
                 //Never right!!!
             } catch (Exception e)
             {
+                //Example of wrapping an exception to hide details
                 throw new Exception("Save failed", e);
+            } finally
+            {
+                writer?.Close();
+                stream?.Close();
             };
         }
 
         private void SaveDataNonStream ()
         {
-            var lines = new List<string>();
+            var lines =_items.Select(item =>
+                            $"{item.Id},{item.Name},{item.Description}," +
+                            $"{item.Price},{(item.IsDiscontinued ? 1 : 0)}");
+
+            //var lines = new List<string>();
             
-            foreach (var item in _items)
-            {
-                var line = $"{item.Id},{item.Name},{item.Description},{item.Price},{(item.IsDiscontinued ? 1 : 0)}";
-                lines.Add(line);
-            };
+            //foreach (var item in _items)
+            //{
+            //    var line = $"{item.Id},{item.Name},{item.Description},{item.Price},{(item.IsDiscontinued ? 1 : 0)}";
+            //    lines.Add(line);
+            //};
 
             File.WriteAllLines(_filename, lines);
         }
@@ -142,26 +169,36 @@ namespace Nile.Data.IO
         {
             EnsureInitialized();
 
-            foreach ( var item in _items)
-            {
-                if (item.Id == id)
-                    return item;
-            };
+            return _items.FirstOrDefault(i => i.Id == id);
 
-            return null;
+            //foreach (var item in _items)
+            //{
+            //    if (item.Id == id)
+            //        return item;
+            //};
+
+            //return null;
         }
+
+        //private bool IsId ( Product product )
+        //{
+        //    return product.Id == id;
+        //}
 
         protected override Product GetProductByNameCore( string name )
         {
             EnsureInitialized();
 
-            foreach (var item in _items)
-            {
-                if (String.Compare(item.Name, name, true) == 0)
-                    return item;
-            };
+            return _items.FirstOrDefault(
+                    i => String.Compare(i.Name, name, true) == 0);
 
-            return null;
+            //foreach (var item in _items)
+            //{
+            //    if (String.Compare(item.Name, name, true) == 0)
+            //        return item;
+            //};
+
+            //return null;
         }
 
         protected override void RemoveCore( int id )

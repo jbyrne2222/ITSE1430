@@ -113,7 +113,8 @@ namespace JonathanByrne.MovieLib.Windows
             {
                 _errorProvider.SetError(textbox, "Title is required");
                 e.Cancel = true;
-            } else
+            }
+            else
                 _errorProvider.SetError(textbox, "");
         }
 
@@ -131,3 +132,6 @@ namespace JonathanByrne.MovieLib.Windows
         }
     }
 }
+
+// Need to add error provider to movie details form for when a movie that already exists in database
+// is entered in again and make sure it goes back to detail form instead of main form

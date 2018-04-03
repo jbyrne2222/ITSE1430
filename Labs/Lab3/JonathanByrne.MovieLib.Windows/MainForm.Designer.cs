@@ -163,7 +163,6 @@
             // 
             // movieBindingSource
             // 
-            this.movieBindingSource.DataSource = typeof(JonathanByrne.MovieLib.Movie);
             // 
             // nameDataGridViewTextBoxColumn
             // 
