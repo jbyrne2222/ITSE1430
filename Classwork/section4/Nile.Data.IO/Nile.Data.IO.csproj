@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B11D9DE3-D5A5-4E20-90F5-482F56579E0F}</ProjectGuid>
+    <ProjectGuid>{F97FC0C7-20B4-43A3-B5C2-E18363D7E871}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nile.Data.IO</RootNamespace>
@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nile\Nile.csproj">
-      <Project>{498499cd-fa2f-4286-a5ba-c92707dc20cd}</Project>
+      <Project>{f3b8dd6e-7216-496a-bd6a-bee83dbf9cd4}</Project>
       <Name>Nile</Name>
     </ProjectReference>
   </ItemGroup>

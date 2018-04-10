@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8CB31050-6807-45F5-B64D-DD4652859BEC}</ProjectGuid>
+    <ProjectGuid>{BD9C86BB-6D5E-4E80-9528-7BFB54CED37D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Nile.Windows</RootNamespace>
     <AssemblyName>Nile.Windows</AssemblyName>
@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -90,19 +91,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Nile.Data.IO\Nile.Data.IO.csproj">
-      <Project>{B11D9DE3-D5A5-4E20-90F5-482F56579E0F}</Project>
+      <Project>{F97FC0C7-20B4-43A3-B5C2-E18363D7E871}</Project>
       <Name>Nile.Data.IO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nile.Data.Memory\Nile.Data.Memory.csproj">
-      <Project>{63ba469f-ebef-4a7d-afcf-7aae6ccc38e7}</Project>
+      <Project>{f95ae9be-fb3f-41c6-b6fe-a7a4c32edeff}</Project>
       <Name>Nile.Data.Memory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Nile.Data.Sql\Nile.Data.Sql.csproj">
+      <Project>{767a655b-d23c-424c-9dd1-8fa413b72eef}</Project>
+      <Name>Nile.Data.Sql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nile\Nile.csproj">
-      <Project>{498499cd-fa2f-4286-a5ba-c92707dc20cd}</Project>
+      <Project>{f3b8dd6e-7216-496a-bd6a-bee83dbf9cd4}</Project>
       <Name>Nile</Name>
     </ProjectReference>
   </ItemGroup>

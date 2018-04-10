@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Nile.Windows
 {
-    /// <summary>Provides a form for adding/editing <see cref="Product"/></summary>
-    public /*abstract*/ partial class ProductDetailForm : Form
+    /// <summary>Provides a form for adding/editing <see cref="Product"/>.</summary>
+    public partial class ProductDetailForm : Form
     {
         #region Construction
 
@@ -20,40 +14,25 @@ namespace Nile.Windows
             InitializeComponent();
         }
 
-        public ProductDetailForm( string title ) : this() //:base()
+        public ProductDetailForm( string title ) : this()
         {
-            //InitializeComponent();
-
             Text = title;
         }
 
-        public ProductDetailForm( Product product ) : this("Edit Product")
+        public ProductDetailForm( Product product ) :this("Edit Product")
         {
-            //InitializeComponent90;
-            //Text = "Edit Product";
-
             Product = product;
         }
         #endregion
 
+        /// <summary>Gets or sets the product being edited.</summary>
         public Product Product { get; set; }
-
-        //public abstract DialogResult ShowDialogEx();
-
-        //public virtual DialogResult ShowDialogEx ()
-        //{
-        //      return ShowDialog();
-        //}
-
+        
         protected override void OnLoad( EventArgs e )
         {
-            //Call base type
-            //OnLoad(e);
             base.OnLoad(e);
 
             //Load product
-            //Only use 'this' when you need the entire object
-            //if (this.Product != null)
             if (Product != null)
             {
                 _txtName.Text = Product.Name;
@@ -69,10 +48,9 @@ namespace Nile.Windows
 
         private void OnCancel( object sender, EventArgs e )
         {
-            //Don't need this method as DialogResult set on buton
         }
 
-        private void OnSave( object sender, EventArgs e )
+        private void OnSave ( object sender, EventArgs e )
         {
             //Force validation of child controls
             if (!ValidateChildren())
@@ -86,31 +64,29 @@ namespace Nile.Windows
                 IsDiscontinued = _chkIsDiscontinued.Checked,
             };
 
-            //Validate product using IValidateableObject
+            //Validate product using IValidatableObject
             var errors = ObjectValidator.TryValidate(product);
             if (errors.Count() > 0)
             {
+                //Get first error
                 DisplayError(errors.ElementAt(0).ErrorMessage);
                 return;
-            };
-
+            };            
+            
             //Return from form
             Product = product;
             DialogResult = DialogResult.OK;
 
-            //Setting this to None will prevent cflose if needed
-            //DialogResult = DialogResult.None;
             Close();
         }
         #endregion
-
-        private void DisplayError( string message )
+        
+        private void DisplayError ( string message )
         {
             MessageBox.Show(this, message, "Error", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+                            MessageBoxIcon.Error);
         }
-
-        private decimal ConvertToPrice( TextBox control )
+        private decimal ConvertToPrice ( TextBox control )
         {
             if (Decimal.TryParse(control.Text, out var price))
                 return price;
@@ -118,12 +94,13 @@ namespace Nile.Windows
             return -1;
         }
 
-        private void _txtName_validating( object sender, System.ComponentModel.CancelEventArgs e )
+        private void _txtName_Validating( object sender, System.ComponentModel.CancelEventArgs e )
         {
             var textbox = sender as TextBox;
 
             if (String.IsNullOrEmpty(textbox.Text))
             {
+
                 _errorProvider.SetError(textbox, "Name is required");
                 e.Cancel = true;
             } else
