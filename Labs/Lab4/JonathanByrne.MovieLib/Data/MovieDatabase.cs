@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JonathanByrne.MovieLib
+namespace JonathanByrne.MovieLib.Data
 {
     /// <summary>Provides an in-memory movie database.</summary>
     public abstract class MovieDatabase : IMovieDatabase

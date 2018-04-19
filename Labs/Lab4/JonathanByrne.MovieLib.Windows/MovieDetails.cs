@@ -93,7 +93,8 @@ namespace JonathanByrne.MovieLib.Windows
 
         private void DisplayError ( string message )
         {
-            MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, message, "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
         }
 
         //Converts string from length textbox to int length in movie class

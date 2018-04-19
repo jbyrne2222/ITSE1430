@@ -114,6 +114,10 @@
       <Project>{c69d007d-7a50-4a9b-b4e7-979a90b75314}</Project>
       <Name>JonathanByrne.MovieLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MovieDatabase\MovieDatabase.sqlproj">
+      <Project>{d336cd26-c9b8-4b7f-83e7-2f951df1fabc}</Project>
+      <Name>MovieDatabase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

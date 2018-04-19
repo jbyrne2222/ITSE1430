@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JonathanByrne.MovieLib.Data;
 using JonathanByrne.MovieLib.Data.Memory;
 using JonathanByrne.MovieLib.Data.Sql;
 

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JonathanByrne.MovieLib
+namespace JonathanByrne.MovieLib.Data
 {
     /// <summary>The interface for our movie database.</summary>
     public interface IMovieDatabase

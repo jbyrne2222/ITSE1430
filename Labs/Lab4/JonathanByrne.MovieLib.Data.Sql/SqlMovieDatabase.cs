@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JonathanByrne.MovieLib.Data.Sql
 {
+    /// <summary>Provides a Sql implementation of the movie database.</summary>
     public class SqlMovieDatabase : MovieDatabase
     {
         private readonly string _connectionString;
@@ -154,7 +153,7 @@ namespace JonathanByrne.MovieLib.Data.Sql
         {
             using (var conn = new SqlConnection(_connectionString))
             {
-                var cmd = new SqlCommand("UpdateProduct", conn);
+                var cmd = new SqlCommand("UpdateMovie", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@id", movie.Id));
@@ -181,8 +180,8 @@ namespace JonathanByrne.MovieLib.Data.Sql
             {
                 Id = Convert.ToInt32(reader["Id"]),
                 Title = reader.GetFieldValue<string>(1),
-                Length = reader.GetInt32(2),
-                Description = reader.GetString(3),
+                Length = reader.GetInt32(3),
+                Description = reader.GetString(2),
                 IsOwned = reader.GetBoolean(4)
             };
         }
